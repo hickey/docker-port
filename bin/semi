@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'semi'
+
+config_file = ENV['SEMI_CONF'] || '/etc/semi.conf'
+
+s = Semi::Driver.new(config_file)
+
+s.start
