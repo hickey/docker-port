@@ -11,8 +11,8 @@ module Semi
 
     tests.keys.each do |rule|
       case rule
-      when 'required'
-        tests[rule] = true unless value.empty?
+    when 'required'
+        tests[rule] = true unless value.nil?
       when 'integer'
         tests[rule] = true if value.is_a? Integer
       when 'string'

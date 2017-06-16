@@ -12,7 +12,11 @@ describe "Semi::validator" do
     ['foobar',   'string,required',                true],
     ['foobar',   'string, required',               true],
     ['foobar',   '/foo/',                          true],
-    ['foobar',   '/fubar/',                        false]
+    ['foobar',   '/fubar/',                        false],
+    ['foobar',   ['/foo/'],                        true],
+    ['foobar',   ['/fubar/'],                      false],
+    [nil,        'required',                       false],
+    [nil,        ['required'],                     false]
    ].each do |ruleset|
     it "validates #{ruleset[0]} against #{ruleset[1]}" do
       if ruleset[2] == true

@@ -18,7 +18,12 @@ module Semi
         begin
           Semi::validate(@dictionary[key], @config.validators[key])
         rescue Semi::ValidationError => err
-          puts "Can not validate #{key}: #{err}"
+          if @dictionary.include? key
+            puts "Can not validate #{key}: #{err}"
+          elsif @config.validators[key].include? 'required'
+            puts "#{key} is a required value, but it was not found."
+            exit(5)
+          end
         end
       }
 
@@ -59,7 +64,7 @@ module Semi
       
 
       # Execute the command line
-      puts "Executing: #{args}"
+      #puts "Executing: #{args}"
       exec([args].flatten.join(' '))
     end
 
