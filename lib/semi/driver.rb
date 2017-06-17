@@ -6,12 +6,12 @@ module Semi
 
     def initialize(path)
       @config = Semi::Config.new(path)
-      @dictionary = ENV.to_h
     end
 
     def start
       # Merge defaults into the environment
-      @dictionary.merge!(@config.defaults)
+      @dictionary = @config.defaults.dup
+      @dictionary.merge!(ENV.to_h)
 
       # Check any validations being asserted
       @config.validators.each_key { |key|
