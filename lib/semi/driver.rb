@@ -10,7 +10,12 @@ module Semi
 
     def start
       # Merge defaults into the environment
-      @dictionary = @config.defaults.dup
+      @dictionary = {}
+      @config.defaults.each_pair do |name,val|
+        @dictionary[name] = Semi::Variable.import(val)
+      end
+
+      puts "dictionary = #{@dictionary.inspect}"
       @dictionary.merge!(ENV.to_h)
 
       # Check any validations being asserted

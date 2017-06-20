@@ -11,14 +11,18 @@ module Semi
 
     tests.keys.each do |rule|
       case rule
-    when 'required'
+      when 'required'
         tests[rule] = true unless value.nil?
       when 'integer'
-        tests[rule] = true if value.is_a? Integer
+        tests[rule] = Semi::Variables::Integer.validate(value)
       when 'string'
-        tests[rule] = true if value.is_a? String
+        tests[rule] = Semi::Variables::String.validate(value)
       when 'boolean'
-        tests[rule] = true if value.is_a? Boolean
+        tests[rule] = Semi::Variables::Boolean.validate(value)
+      when 'path'
+        tests[rule] = Semi::Variables::Path.validate(value)
+      when 'url'
+        tests[rule] = Semi::Variables::Url.validate(value)
       end
 
       # test for regular expression
