@@ -8,7 +8,7 @@ module Semi::Variables
     end
 
     def self.validate(value)
-      if value.class.to_s == 'String'
+      if ['String', 'Semi::Variables::String'].include? value.class.to_s
         return true
       end
       false
