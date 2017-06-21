@@ -9,14 +9,16 @@ module Semi
     end
 
     def start
-      # Merge defaults into the environment
+      # Initialize the dictionary with the defaults
       @dictionary = {}
       @config.defaults.each_pair do |name,val|
         @dictionary[name] = Semi::Variable.import(val)
       end
 
-      puts "dictionary = #{@dictionary.inspect}"
-      @dictionary.merge!(ENV.to_h)
+      # Now manually merge in the env vars
+      ENV.each_pair do |name, val|
+        @dictionary[name] = Semi::Variable.import(val)
+      end
 
       # Check any validations being asserted
       @config.validators.each_key { |key|
@@ -38,14 +40,16 @@ module Semi
       # Process the config files and generate final versions
       @config.files.each do |file|
         # Read the template file and render
-        contents = File.open(file, 'r') do |fp|
-          renderer = ERB.new(fp.readlines.join)
-          renderer.result(@dictionary.instance_eval {binding})
-        end
+        if File.exist? file
+          contents = File.open(file, 'r') do |fp|
+            renderer = ERB.new(fp.readlines.join)
+            renderer.result(@dictionary.instance_eval {binding})
+          end
 
-        # Reopen the file and write the rendered contents
-        File.open(file, 'w') do |fp|
-          fp.write(contents)
+          # Reopen the file and write the rendered contents
+          File.open(file, 'w') do |fp|
+            fp.write(contents)
+          end
         end
       end
 
