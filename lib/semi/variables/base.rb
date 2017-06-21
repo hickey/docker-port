@@ -12,9 +12,12 @@ module Semi
       end
 
       def to_s
-        @value
+        @value.to_s
       end
       
+      def value
+        @value
+      end
     end
   end
 end
