@@ -19,7 +19,7 @@ module Semi::Variables
     
     def self.validate(value)
       if ['String', 'Semi::Variables::Path'].include? value.class.to_s
-        if @@path_re.match(value)
+        if @@path_re.match(value.to_s)
           return true
         end
       end

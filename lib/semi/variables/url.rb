@@ -19,7 +19,7 @@ module Semi::Variables
 
     def self.validate(val)
       if ['String', 'Semi::Variables::Url'].include? val.class.to_s
-        if @@url_re.match(val)
+        if @@url_re.match(val.to_s)
           return true
         end
       end

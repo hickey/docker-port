@@ -28,13 +28,13 @@ module Semi
       # test for regular expression
       if rule.start_with?('/') and rule.end_with?('/')
         re = Regexp.new(rule[1..-2])
-        tests[rule] = true if re.match(value)
+        tests[rule] = true if re.match(value.to_s)
       end
     end
 
     failures = tests.each_pair.map { |r,t| r if not t }.compact
     unless failures.empty?
-      raise ValidationError, "#{value} does not validate against #{failures} rules"
+      raise ValidationError, "#{value}(#{value.class}) does not validate against #{failures} rules"
     end
   end
 end
