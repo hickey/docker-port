@@ -11,8 +11,22 @@ module Semi
 
   module Variable
 
-    def self.import(val)
-      puts "#{val}: #{val.class}"
+    # Variable types are ordered from most to least specific
+    @@var_types = { 'url'       =>   Semi::Variables::Url,
+                    'path'      =>   Semi::Variables::Path,
+                    'boolean'   =>   Semi::Variables::Boolean,
+                    'integer'   =>   Semi::Variables::Integer,
+                    'string'    =>   Semi::Variables::String, }
+
+    def self.import(val, hints=nil)
+      # If hints have been supplied, try to create from them
+      if not hints.nil?
+        hints = [hints].flatten.select {|h| @@var_types.include? h }
+        if hints.count > 0
+          return @@var_types[hints[0]].new(val)
+        end
+      end
+      
       # look for the obsure patterns before returning a string var
       case
       when Semi::Variables::Url::validate(val)

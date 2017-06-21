@@ -12,13 +12,17 @@ module Semi
       # Initialize the dictionary with the defaults
       @dictionary = {}
       @config.defaults.each_pair do |name,val|
-        @dictionary[name] = Semi::Variable.import(val)
+        hints = @config.validators[name] || nil
+        @dictionary[name] = Semi::Variable.import(val, hints)
       end
 
       # Now manually merge in the env vars
       ENV.each_pair do |name, val|
-        @dictionary[name] = Semi::Variable.import(val)
+        hints = @config.validators[name] || nil
+        @dictionary[name] = Semi::Variable.import(val, hints)
       end
+
+      #puts @dictionary.inspect
 
       # Check any validations being asserted
       @config.validators.each_key { |key|
