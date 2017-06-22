@@ -12,22 +12,20 @@ module Semi
       # Initialize the dictionary with the defaults
       @dictionary = {}
       @config.defaults.each_pair do |name,val|
-        name.downcase!
         hints = @config.validators[name] || nil
-        @dictionary[name] = Semi::Variable.import(val, hints)
+        @dictionary[name.downcase] = Semi::Variable.import(val, hints)
       end
 
       # Now manually merge in the env vars
       ENV.each_pair do |name, val|
-        name.downcase!
         hints = @config.validators[name] || nil
-        @dictionary[name] = Semi::Variable.import(val, hints)
+        @dictionary[name.downcase] = Semi::Variable.import(val, hints)
       end
 
       # Check any validations being asserted
       @config.validators.each_key { |key|
         begin
-          Semi::validate(@dictionary[key], @config.validators[key])
+          Semi::validate(@dictionary[key.downcase], @config.validators[key])
         rescue Semi::ValidationError => err
           if @dictionary.include? key
             puts "Can not validate #{key}: #{err}"
@@ -59,6 +57,7 @@ module Semi
 
       # Check for pre-defined commands
       args = ARGV
+      puts args.inspect
       if args.count == 0 and @config.commands.include? 'default'
         args = @config.commands['default']
       elsif args.count == 1 and args[0] == 'help'
@@ -77,7 +76,7 @@ module Semi
       
 
       # Execute the command line
-      #puts "Executing: #{args}"
+      puts "Executing: #{args}"
       exec([args].flatten.join(' '))
     end
 
