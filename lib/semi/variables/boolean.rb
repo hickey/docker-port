@@ -27,6 +27,11 @@ module Semi::Variables
     def self.validate(value)
       real_value = nil
 
+      # If Semi::Variables::Boolean, then get the string representation
+      if value.class == Semi::Variables::Boolean
+        value = value.to_s
+      end
+      
       # test to see if the value is a common true value
       if value =~ /true|yes|enable/i
         real_value = true
