@@ -45,6 +45,7 @@ module Semi::Variables
       false
     end
 
+
     def onoff
       if @value
         'on'

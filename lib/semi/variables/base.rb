@@ -18,6 +18,51 @@ module Semi
       def value
         @value
       end
+      
+      def &(other)
+        return @value & other
+      end
+
+      def |(other)
+        return @value | other
+      end
+
+      def <=>(other)
+        return @value <=> other
+      end
+
+      def eql?(other)
+        return @value.eql? other
+      end
+
+      def equal?(other)
+        return @value.equal? other
+      end
+
+      def ^(other)
+        return @value ^ other
+      end
+
+      def !=(other)
+        return @value != other
+      end
+
+      def ==(other)
+        return @value == other
+      end
+
+      def ===(other)
+        return @value === other
+      end
+
+      def =~(other)
+        return @value =~ other
+      end
+
+      def !~(other)
+        return @value != other
+      end
+
 
       def method_missing(m, *args, &block)
         @value.to_s.send(m, *args, &block)
