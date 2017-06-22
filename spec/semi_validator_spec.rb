@@ -20,7 +20,7 @@ describe "Semi::validator" do
     ['/etc/passwd', 'path',                        true],
     ['../parent', ['path'],                        true],
     ['.005',      'path',                          true],
-    ['file.name', 'path',                          true],
+    ['file.name', 'path',                          false],
     ['~user',     'path',                          true],
     ['~user/dir/file', 'path',                     true],
     ['http://www.simple.com', 
