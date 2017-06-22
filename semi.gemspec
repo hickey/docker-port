@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name            = 'semi'
-  s.version         = '0.3.4'
+  s.version         = '0.3.5'
   s.date            = '2017-06-16'
   s.summary         = 'Versatile Docker entrypoint script allowing the creation of configuration files from ERB templates'
   s.description     = ''
