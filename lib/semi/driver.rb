@@ -46,7 +46,7 @@ module Semi
         # Read the template file and render
         if File.exist? file
           contents = File.open(file, 'r') do |fp|
-            renderer = ERB.new(fp.readlines.join)
+            renderer = ERB.new(fp.readlines.join, nil, '%<>-')
             renderer.result(@dictionary.instance_eval {binding})
           end
 
