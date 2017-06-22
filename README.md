@@ -85,4 +85,10 @@ This is useful for adding automation and providing simple commands to
 activate more complex commands in the container. 
 
 There is one special value (default) that will be used when the entrypoint
-is not provided any arguements. 
+is not provided any arguements.
+
+Templates
+---------
+Configuration files are marked up using standard ERB template statements.
+
+All variables used in ERB templates need to be specified as lower case. 
