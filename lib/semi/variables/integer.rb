@@ -21,11 +21,14 @@ module Semi::Variables
     def self.validate(value)
       if value.class == Fixnum
         return true
-      elsif value.class == Semi::Variables::Integer and value.value =~ /^\d+$/
+      elsif value.class == Semi::Variables::Integer and value.to_s =~ /^\d+$/
         return true
       end
       false
     end
     
+    def method_missing(m, *args, &block)
+        @value.to_i.send(m, *args, &block)
+      end
   end
 end
