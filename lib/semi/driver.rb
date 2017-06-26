@@ -42,22 +42,11 @@ module Semi
       # Process the config files and generate final versions
       @config.files.each do |file|
         # Read the template file and render
-        if File.exist? file
-          contents = File.open(file, 'r') do |fp|
-            renderer = ERB.new(fp.readlines.join, nil, '%<>-')
-            renderer.result(@dictionary.instance_eval {binding})
-          end
-
-          # Reopen the file and write the rendered contents
-          File.open(file, 'w') do |fp|
-            fp.write(contents)
-          end
-        end
+        @config.process_file(file, @dictionary)
       end
 
       # Check for pre-defined commands
       args = ARGV
-      puts args.inspect
       if args.count == 0 and @config.commands.include? 'default'
         args = @config.commands['default']
       elsif args.count == 1 and args[0] == 'help'
@@ -76,7 +65,7 @@ module Semi
       
 
       # Execute the command line
-      puts "Executing: #{args}"
+      #puts "Executing: #{args}"
       exec([args].flatten.join(' '))
     end
 

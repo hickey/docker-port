@@ -20,7 +20,7 @@ module Semi
 
     def self.import(val, hints=nil)
       # If hints have been supplied, try to create from them
-      if not hints.nil?
+      unless hints.nil?
         hints = [hints].flatten.select {|h| @@var_types.include? h }
         if hints.count > 0
           return @@var_types[hints[0]].new(val)
