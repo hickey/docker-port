@@ -49,7 +49,13 @@ module Semi
         # Read the file and apply @dictionary values
         contents = File.open(filename, 'r') do |fp|
           renderer = ERB.new(fp.readlines.join, nil, '%<>-')
-          renderer.result(dictionary.instance_eval {binding})
+          begin
+            renderer.result(dictionary.instance_eval {binding})
+          rescue SyntaxError => e
+            $stderr.puts "Error processing ERB expressions in #{filename}"
+            $stderr.puts "ERB reported #{e}"
+            exit 1
+          end
         end
 
         # Reopen the file and write the rendered contents
