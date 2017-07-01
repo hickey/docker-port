@@ -5,6 +5,7 @@ require 'semi/variables/boolean'
 require 'semi/variables/path'
 require 'semi/variables/url'
 
+
 module Semi
 
   class VariableError < RuntimeError; end 
@@ -46,11 +47,30 @@ module Semi
       else
         return Semi::Variables::String.new(val)
       end
-      
+
     end
 
-    
 
+    def self.expand(val, dict)
+      unless ['Semi::Variables::String', 'String'].include? val.class.to_s
+        return val
+      end
+      
+      check = true
+      while check
+        # Look for simple variable expansion
+        if match = /\$\{?(\w+)\}?/.match(val)
+          val = match.pre_match + dict[match[1].downcase] + match.post_match
+        elsif match = /\$\((.*)\)/.match(val)
+          val = match.pre_match + `#{match[1]} 2>/dev/null` + match.post_match
+        else
+          # no more matches... we must be done...
+          check = false
+        end
+      end
+      
+      return val
+    end
 
   end
 end

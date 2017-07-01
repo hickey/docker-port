@@ -22,6 +22,11 @@ module Semi
         @dictionary[name.downcase] = Semi::Variable.import(val, hints)
       end
 
+      # Now that all values should be present in @dictionary, do any expansions
+      @dictionary.each_pair do |name, val|
+        @dictionary[name] = Semi::Variable.expand(val, @dictionary)
+      end
+
       # Check any validations being asserted
       @config.validators.each_key { |key|
         begin

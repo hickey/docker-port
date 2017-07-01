@@ -26,7 +26,7 @@ module Semi::Variables
       end
       false
     end
-    
+
     def method_missing(m, *args, &block)
         @value.to_i.send(m, *args, &block)
       end
