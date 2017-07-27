@@ -45,9 +45,14 @@ module Semi
       @dictionary = OpenStruct.new(@dictionary)
 
       # Process the config files and generate final versions
-      @config.files.each do |file|
-        # Read the template file and render
-        @config.process_file(file, @dictionary)
+      begin
+        @config.files.each do |file|
+          # Read the template file and render
+          @config.process_file(file, @dictionary)
+        end
+      rescue NoMethodError
+        puts "files key in semi.conf does not contain an array of files."
+        exit (6)
       end
 
       # Check for pre-defined commands
