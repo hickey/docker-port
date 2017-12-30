@@ -17,7 +17,7 @@ module Semi::Variables
     def validate
       self.validate(@value)
     end
-    
+
     def self.validate(value)
       if value.class == Fixnum
         return true

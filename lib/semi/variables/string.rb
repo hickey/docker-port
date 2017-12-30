@@ -13,6 +13,6 @@ module Semi::Variables
       end
       false
     end
-    
+
   end
 end

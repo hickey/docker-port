@@ -31,7 +31,7 @@ module Semi::Variables
       if value.class == Semi::Variables::Boolean
         value = value.to_s
       end
-      
+
       # test to see if the value is a common true value
       if value =~ /true|yes|on|enable/i
         real_value = true

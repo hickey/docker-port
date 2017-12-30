@@ -17,7 +17,7 @@ module Semi::Variables
     def validate
       self.validate(@value)
     end
-    
+
     def self.validate(value)
       if ['String', 'Semi::Variables::Path'].include? value.class.to_s
         if @@path_re.match(value.to_s)
@@ -28,10 +28,10 @@ module Semi::Variables
       end
       false
     end
-    
+
     # provide a simple scoring method to assist in identifying
     # a string as a path. 0.0 is a pure string with no path
-    # markers, 
+    # markers,
     def self.path_score(path)
       return 0.0 if path.empty?
 
@@ -41,17 +41,17 @@ module Semi::Variables
       #puts "#{path} m/p/s = #{metach}/#{plen}/#{1.0 - (((plen - metach) * 1.0) / (plen + metach))}"
       1.0 - (((plen - metach)*1.0) / (plen + metach))
     end
-    
+
     def path
       match = @@path_re.match(@value)
-      if match 
+      if match
         match['path']
       end
     end
 
     def file
       match = @@path_re.match(@value)
-      if match 
+      if match
         match['file']
       end
     end

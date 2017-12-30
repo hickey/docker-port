@@ -8,7 +8,7 @@ require 'semi/variables/url'
 
 module Semi
 
-  class VariableError < RuntimeError; end 
+  class VariableError < RuntimeError; end
 
   module Variable
 
@@ -27,7 +27,7 @@ module Semi
           return @@var_types[hints[0]].new(val)
         end
       end
-      
+
       # look for the obsure patterns before returning a string var
       case
       when Semi::Variables::Url::validate(val)
@@ -55,7 +55,7 @@ module Semi
       unless ['Semi::Variables::String', 'String'].include? val.class.to_s
         return val
       end
-      
+
       check = true
       while check
         # Look for simple variable expansion
@@ -68,7 +68,7 @@ module Semi
           check = false
         end
       end
-      
+
       return val
     end
 

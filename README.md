@@ -42,7 +42,7 @@ Validators
 Validators allow one to insure that the value of a variable is within a
 specified range. Each key of the validate section is a name of a variable
 that can be used in the ERB templates. The values are one or more
-validation expressions to test the values against. The values may be 
+validation expressions to test the values against. The values may be
 specified as a comma seperated string or as an array.
 
 * required
@@ -82,7 +82,7 @@ Commands
 --------
 Additional commands can be added to the container in the commands section.
 This is useful for adding automation and providing simple commands to
-activate more complex commands in the container. 
+activate more complex commands in the container.
 
 There is one special value (default) that will be used when the entrypoint
 is not provided any arguements.
@@ -91,4 +91,13 @@ Templates
 ---------
 Configuration files are marked up using standard ERB template statements.
 
-All variables used in ERB templates need to be specified as lower case. 
+All variables used in ERB templates need to be specified as lower case.
+
+Debugging
+---------
+Simple debugging output can be enabled by defining the environmental
+variable $SEMI_DEBUG. As long as the variable is set to any value, debug
+statements will be sent to the stdout file handle.
+
+At this time the only real debug output is the command that will be
+executed by semi.

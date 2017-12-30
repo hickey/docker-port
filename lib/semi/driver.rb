@@ -72,11 +72,24 @@ module Semi
       elsif @config.commands.include? args[0]
         args = @config.commands[args[0]]
       end
-      
 
       # Execute the command line
-      #puts "Executing: #{args}"
-      exec([args].flatten.join(' '))
+      if os.environ['SEMI_DEBUG']
+        puts "Semi debug:: executing: #{args}"
+      end
+      begin
+        exec([args].flatten.join(' '))
+      rescue SystemCallError => e
+        if e.errno == Errno::ENOENT
+          puts "Command not found: executing: #{args}"
+        else
+          puts "Unknown system call failure: #{e.inspect}"
+        end
+        exit(e.errno)
+      rescue Exception => e
+        puts "Unknown exception: #{e.inspect}"
+        exit(99)
+      end
     end
 
   end

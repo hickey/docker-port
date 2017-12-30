@@ -2,7 +2,7 @@ require 'yaml'
 
 module Semi
   class Config
-    
+
     attr_reader :defaults
     attr_reader :files
     attr_reader :validators
@@ -36,7 +36,7 @@ module Semi
       if data.key? 'commands'
         @commands = data['commands']
       end
-      
+
       return data
     end
 

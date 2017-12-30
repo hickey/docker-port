@@ -18,7 +18,7 @@ module Semi
       def value
         @value
       end
-      
+
       def &(other)
         return @value & other
       end
@@ -67,7 +67,7 @@ module Semi
       def method_missing(m, *args, &block)
         @value.to_s.send(m, *args, &block)
       end
-      
+
     end
   end
 end

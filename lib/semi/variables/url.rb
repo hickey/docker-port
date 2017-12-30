@@ -29,42 +29,42 @@ module Semi::Variables
 
     def proto
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['proto']
       end
     end
-    
+
     def host
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['host']
       end
     end
 
     def port
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['port']
       end
     end
 
     def path
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['path']
       end
     end
 
     def file
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['file']
       end
     end
 
     def params
       match = @@url_re.match(@value)
-      if match 
+      if match
         match['params']
       end
     end
