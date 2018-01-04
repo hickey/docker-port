@@ -74,7 +74,7 @@ module Semi
       end
 
       # Execute the command line
-      if os.environ['SEMI_DEBUG']
+      if ENV['SEMI_DEBUG']
         puts "Semi debug:: executing: #{args}"
       end
       begin
