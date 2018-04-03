@@ -19,7 +19,7 @@ module Semi::Variables
     end
 
     def self.validate(value)
-      if value.class == Fixnum
+      if value.class == 1.class
         return true
       elsif value.class == Semi::Variables::Integer and value.to_s =~ /^\d+$/
         return true

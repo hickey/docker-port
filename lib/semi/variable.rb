@@ -38,7 +38,7 @@ module Semi
         return Semi::Variables::Boolean.new(val)
       when Semi::Variables::Integer.validate(val)
         return Semi::Variables::Integer.new(val)
-      when val.class == Fixnum
+      when val.class == 1.class   # Fixnum vs Integer
         return Semi::Variables::Integer.new(val)
       when val.class == TrueClass
         return Semi::Variables::Boolean.new(val)
