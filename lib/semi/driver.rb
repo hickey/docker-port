@@ -56,7 +56,7 @@ module Semi
       end
 
       # Replace ENV with @dictionary
-      @dictionary.each_pair {|k,v| ENV[k.to_s] = v}
+      @dictionary.each_pair {|k,v| ENV[k.to_s] = v.to_s}
 
       # Check for pre-defined commands
       args = ARGV
