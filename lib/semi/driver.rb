@@ -55,6 +55,9 @@ module Semi
         exit (6)
       end
 
+      # Replace ENV with @dictionary
+      @dictionary.each_pair {|k,v| ENV[k] = v}
+
       # Check for pre-defined commands
       args = ARGV
       if args.count == 0 and @config.commands.include? 'default'

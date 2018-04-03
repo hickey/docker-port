@@ -7,6 +7,7 @@ module Semi
     if rules.class == String
       rules = rules.split(/,\s?/)
     end
+    # build a checklist for rules that match
     tests = Hash[ rules.collect { |r| [r, false] } ]
 
     tests.keys.each do |rule|
