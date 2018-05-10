@@ -33,9 +33,9 @@ module Semi::Variables
       end
 
       # test to see if the value is a common true value
-      if value =~ /true|yes|on|enable/i
+      if value =~ /^(true|yes|on|enable)$/i
         real_value = true
-      elsif value =~ /false|no|off|disable/i
+      elsif value =~ /^(false|no|off|disable)$/i
         real_value = false
       end
 

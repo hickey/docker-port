@@ -90,6 +90,8 @@ describe Semi::Variable do
     ['http://www:888',       'Semi::Variables::Url',       nil],
     ['http://www/some/file', 'Semi::Variables::Url',       nil],
     ['http:/www/',           'Semi::Variables::Path',      nil],
+    ['production',           'Semi::Variables::String',    'string'],
+    ['production',           'Semi::Variables::String',    nil],
     
   ].each do |test|
     it "#import identifies #{test[0]} as #{test[1]}" do
