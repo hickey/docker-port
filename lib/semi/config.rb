@@ -20,7 +20,13 @@ module Semi
     end
 
     def load(path)
-      data = YAML.load_file(path)
+      begin
+        data = YAML.load_file(path)
+      rescue Errno::ENOENT
+        $stderr.puts "Unable to read #{path}"
+        exit(1)
+      end
+
       if data.key? 'defaults'
         @defaults = data['defaults']
       end
