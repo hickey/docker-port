@@ -8,7 +8,7 @@ module Semi
       @config = Semi::Config.new(path)
     end
 
-    def start
+    def start(args)
       # Initialize the dictionary with the defaults
       @dictionary = {}
       @config.defaults.each_pair do |name,val|
@@ -59,7 +59,9 @@ module Semi
       @dictionary.each_pair {|k,v| ENV[k.to_s] = v.to_s}
 
       # Check for pre-defined commands
-      args = ARGV
+      if ENV['SEMI_DEBUG']
+        puts "Semi debug:: args = #{args.inspect}"
+      end
       if args.count == 0 and @config.commands.include? 'default'
         args = @config.commands['default']
       elsif args.count == 1 and args[0] == 'help'
