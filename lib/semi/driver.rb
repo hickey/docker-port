@@ -75,7 +75,7 @@ module Semi
         printf("  %-10s   => %s\n", 'help', 'List shortcut and additional commands')
         exit(0)
       elsif @config.commands.include? args[0]
-        args = [@config.commands[args[0]], args[1..]].flatten
+        args = [@config.commands[args[0]], args[1..-1]].flatten
       end
 
       # Execute the command line
